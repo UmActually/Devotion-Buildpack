@@ -1,0 +1,50 @@
+#!/bin/sh
+
+ORACLE_URL="https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip"
+
+arrow() {
+  sed -u 's/^/-----> /'
+}
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+# SETUP
+echo "Setting up" | arrow
+
+BUILD_DIR=${1:-}
+cd $BUILD_DIR
+
+PROFILE_PATH=".profile.d/instantclient.sh"
+echo 'export PATH="$PATH:/app/vendor/oracle/instantclient_21_13"' >> $PROFILE_PATH
+echo 'export LD_LIBRARY_PATH="/app/vendor/oracle/instantclient_21_13"' >> $PROFILE_PATH
+
+if [ -f vendor ]; then
+  echo "Removing vendor directory" | indent
+  rm -r vendor
+fi
+
+echo "Making new directories" | indent
+mkdir vendor
+cd vendor
+mkdir oracle
+
+# INSTANT CLIENT
+echo "Installing Oracle Instant Client" | arrow
+
+cd oracle
+echo "Downloading" | indent
+code=$(curl "$ORACLE_URL" -L --silent --fail --retry 5 --retry-max-time 15 -o instantclient.zip --write-out "%{http_code}")
+if [ "$code" != "200" ]; then
+  echo "Unable to download Instant Client: $code" | indent && exit 1
+fi
+
+echo "Unpacking" | indent
+unzip -q "instantclient.zip"
+if [ "$?" != "0" ]; then
+  echo "Failed to unpack Instant Client" | indent && exit 1
+fi
+rm "instantclient.zip"
+
+echo "Done" | indent
