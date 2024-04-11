@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ORACLE_URL="https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip"
+ORACLE_URL="https://download.oracle.com/otn_software/linux/instantclient/1922000/instantclient-basic-linux.x64-19.22.0.0.0dbru.zip"
 
 arrow() {
   sed -u 's/^/-----> /'
@@ -19,8 +19,8 @@ cd $BUILD_DIR
 mkdir -p ".profile.d"
 
 PROFILE_PATH=".profile.d/instantclient.sh"
-echo 'export PATH="$PATH:/app/vendor/oracle/instantclient_21_13"' >> $PROFILE_PATH
-echo 'export LD_LIBRARY_PATH="/app/vendor/oracle/instantclient_21_13"' >> $PROFILE_PATH
+echo 'export PATH="$PATH:/app/vendor/oracle/instantclient_19_22"' >> $PROFILE_PATH
+echo 'export LD_LIBRARY_PATH="/app/vendor/oracle/instantclient_19_22"' >> $PROFILE_PATH
 
 if [ -f vendor ]; then
   echo "Removing vendor directory" | indent
