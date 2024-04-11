@@ -36,7 +36,6 @@ mkdir oracle
 echo "Installing Oracle Instant Client" | arrow
 
 cd oracle
-pwd | indent
 echo "Downloading" | indent
 code=$(curl "$ORACLE_URL" -L --silent --fail --retry 5 --retry-max-time 15 -o instantclient.zip --write-out "%{http_code}")
 if [ "$code" != "200" ]; then
@@ -49,5 +48,10 @@ if [ "$?" != "0" ]; then
   echo "Failed to unpack Instant Client" | indent && exit 1
 fi
 rm "instantclient.zip"
+
+echo "Details" | arrow
+ls -a "instantclient_21_13" | indent
+ls | indent
+pwd | indent
 
 echo "Done" | indent
