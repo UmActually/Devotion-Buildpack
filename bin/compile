@@ -49,6 +49,7 @@ if [ "$?" != "0" ]; then
 fi
 rm "instantclient.zip"
 
-cp instantclient_21_13/libclntsh.so $BUILD_DIR
+echo "Copying files" | indent
+cp -r instantclient_21_13/* $BUILD_DIR
 
 echo "Done" | indent
