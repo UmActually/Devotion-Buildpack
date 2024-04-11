@@ -49,9 +49,6 @@ if [ "$?" != "0" ]; then
 fi
 rm "instantclient.zip"
 
-echo "Details" | arrow
-ls -a "instantclient_21_13" | indent
-ls | indent
-pwd | indent
+cp instantclient_21_13/libclntsh.so $BUILD_DIR
 
 echo "Done" | indent
