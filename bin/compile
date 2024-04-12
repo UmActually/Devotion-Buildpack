@@ -22,7 +22,7 @@ mkdir -p ".profile.d"
 PROFILE_PATH=".profile.d/instantclient.sh"
 echo 'export PATH="$PATH:/app/vendor/oracle/instantclient_19_22"' >> $PROFILE_PATH
 echo 'export LIBRARY_PATH="$LIBRARY_PATH:/app/vendor/oracle/instantclient_19_22"' >> $PROFILE_PATH
-echo 'export LD_LIBRARY_PATH="/app/vendor/oracle/instantclient_19_22"' >> $PROFILE_PATH
+echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/app/vendor/oracle/instantclient_19_22"' >> $PROFILE_PATH
 
 if [ -f vendor ]; then
   echo "Removing vendor directory" | indent
